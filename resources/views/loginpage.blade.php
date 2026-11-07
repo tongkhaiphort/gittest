@@ -10,7 +10,6 @@
     <h1>Login page</h1>
     <h2>Please login your account</h2>
     @foreach ($login as $log)
-        <h1>login Successfully</h1>
     @endforeach
 </body>
 </html>
