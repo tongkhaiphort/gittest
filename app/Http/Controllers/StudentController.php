@@ -12,12 +12,13 @@ class StudentController
     public function index()
     {
         //
-        $students = [
-            "AH POY",
-            "AH LOY",
-            "VANDA"
-        ];
-        return view('student', compact('students'));
+       $student = [
+            'id' => 1,
+            'name'=>'patrick',
+            'age'=>37,
+            'city'=>'USA'
+       ];
+       return view('student', compact('student'));
     }
     /**
      * Show the form for creating a new resource.

@@ -7,12 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Student List</h1>
+    {{-- <h1>Student List</h1>
     <ul>
         @foreach ($students as $student )
             <li>{{$student}}</li>
         @endforeach
-    </ul>
+    </ul> --}}
+    <h1>Student Profile</h1>
+    <p><strong>Name : </strong>{{$student['name']}}</p>
+    <p><strong>Age : </strong>{{$student['age']}}</p>
+    <p><strong>City : </strong>{{$student['city']}}</p>
+
 
 </body>
 </html>

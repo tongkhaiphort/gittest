@@ -12,7 +12,12 @@ class UserController
     public function index()
     {
         //
-        return "Hello ! this is usercontroller";
+        $login = [
+           "patrick",
+           "dexter",
+           "lila"
+        ];
+        return view('loginpage', compact('login'));
     }
 
     /**
