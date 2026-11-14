@@ -21,3 +21,4 @@ Route::get('/class',[ClassController::class,'index']);
 
 Route::get('/login',[UserController::class,'index']);
 
+
