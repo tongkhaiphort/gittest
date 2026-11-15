@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UserController
+class OrderDetailController
 {
     /**
      * Display a listing of the resource.
@@ -12,12 +12,6 @@ class UserController
     public function index()
     {
         //
-        $login = [
-           "patrick",
-           "dexter",
-           "lila"
-        ];
-        return view('loginpage', compact('login'));
     }
 
     /**
@@ -26,7 +20,6 @@ class UserController
     public function create()
     {
         //
-        return "Create user";
     }
 
     /**
@@ -34,7 +27,7 @@ class UserController
      */
     public function store(Request $request)
     {
-        return "Update User";
+        //
     }
 
     /**

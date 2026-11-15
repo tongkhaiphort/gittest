@@ -86,6 +86,7 @@ class ProductController
     public function edit(string $id)
     {
         //
+        $product = Product::findOrFail($id);
         return response()->json([
             'status' => 'success',
             'message' => 'Product retrieved successfully',

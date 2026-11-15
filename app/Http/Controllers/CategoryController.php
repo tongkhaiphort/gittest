@@ -31,7 +31,7 @@ class CategoryController
                 'errors' => $validator->errors(),
             ], 422);
         }
-
+        //eloquent create method to create a new category using the validated data
         $category = Category::create($validator->validated());
 
         return response()->json([

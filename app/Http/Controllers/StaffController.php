@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ClassController
+class StaffController
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +12,6 @@ class ClassController
     public function index()
     {
         //
-        return 'Hello class';
     }
 
     /**

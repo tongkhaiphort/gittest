@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StudentController
+class CustomerController
 {
     /**
      * Display a listing of the resource.
@@ -12,14 +12,8 @@ class StudentController
     public function index()
     {
         //
-       $student = [
-            'id' => 1,
-            'name'=>'patrick',
-            'age'=>37,
-            'city'=>'USA'
-       ];
-       return view('student', compact('student'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
