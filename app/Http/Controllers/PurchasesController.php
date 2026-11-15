@@ -2,63 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchases;
 use Illuminate\Http\Request;
 
 class PurchasesController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(
+            Purchases::with(['supplier', 'purchaseDetails.product'])->get()
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'supplier_id' => 'required|integer|exists:suppliers,id',
+            'purchase_date' => 'nullable|date',
+            'total_amount' => 'nullable|numeric|min:0',
+        ]);
+
+        $purchase = Purchases::create($data)->load(['supplier', 'purchaseDetails.product']);
+
+        return response()->json($purchase, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $purchase = Purchases::with(['supplier', 'purchaseDetails.product'])->findOrFail($id);
+
+        return response()->json($purchase);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $purchase = Purchases::findOrFail($id);
+        $data = $request->validate([
+            'supplier_id' => 'sometimes|required|integer|exists:suppliers,id',
+            'purchase_date' => 'sometimes|nullable|date',
+            'total_amount' => 'sometimes|nullable|numeric|min:0',
+        ]);
+
+        $purchase->update($data);
+
+        return response()->json($purchase->load(['supplier', 'purchaseDetails.product']));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $purchase = Purchases::findOrFail($id);
+        $purchase->delete();
+
+        return response()->json(['message' => 'Purchase deleted successfully']);
     }
 }

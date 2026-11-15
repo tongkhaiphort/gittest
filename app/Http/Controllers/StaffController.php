@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\staff;
 use Illuminate\Http\Request;
 
 class StaffController
@@ -12,6 +13,7 @@ class StaffController
     public function index()
     {
         //
+        return staff::with('orders')->get();
     }
 
     /**
@@ -27,7 +29,20 @@ class StaffController
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:100',
+            'gender' => 'nullable|string|max:10',
+            'phone' => 'nullable|string|max:20',
+            'salary' => 'nullable|numeric|min:0',
+        ]);
+
+        $staff = staff::create($data);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Staff created successfully',
+            'data' => $staff,
+        ], 201);
     }
 
     /**
@@ -36,6 +51,7 @@ class StaffController
     public function show(string $id)
     {
         //
+        return staff::with('orders')->findOrFail($id);
     }
 
     /**
@@ -52,6 +68,21 @@ class StaffController
     public function update(Request $request, string $id)
     {
         //
+        $staff = staff::findOrFail($id);
+        $data = $request->validate([
+            'name' => 'sometimes|required|string|max:100',
+            'gender' => 'sometimes|nullable|string|max:10',
+            'phone' => 'sometimes|nullable|string|max:20',
+            'salary' => 'sometimes|nullable|numeric|min:0',
+        ]);
+
+        $staff->update($data);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Staff updated successfully',
+            'data' => $staff,
+        ], 200);
     }
 
     /**
@@ -60,5 +91,8 @@ class StaffController
     public function destroy(string $id)
     {
         //
+        $staff = staff::findOrFail($id);
+        $staff->delete();
+        return response()->json(['message' => 'Staff deleted successfully']);
     }
 }
